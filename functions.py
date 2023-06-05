@@ -60,10 +60,14 @@ def delete_data() -> None:
     if contact_to_delete:
         for x in contact_to_delete:
             book.remove(x)
-
+    write_data(book)
 
 
 def change_data() -> None:
     """Изменяет контакт"""
     pass
 
+def write_data(data: list[str]) -> None:
+    """" Записывает информацию в файл """
+    with open('book.txt', 'w', encoding='utf-8') as file:
+        file.write(str(data))
