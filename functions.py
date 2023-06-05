@@ -5,7 +5,7 @@ class fio:
     def print_fio(self):
         print(self)
     def __str__(self):
-        return f"{self.last_name} | {self.name}"
+        return f"{self.last_name} {self.name}"
 
 
 def show_data() -> None:
