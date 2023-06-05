@@ -20,14 +20,14 @@ def add_data() -> None:
     name = input('Введите Имя: ')
     phone = input('Введите номер телефона: ')
     with open('book.txt', 'a', encoding='utf-8') as file:
-        file.write(f'\n {fio(surname, name)} | {phone}')
+        file.write(f' ,{fio(surname, name)} | {phone}')
 
 
 def find_data() -> None:
     """Печатает результат поиска по справочнику."""
     with open('book.txt', 'r', encoding='utf-8') as file:
         data = file.read()
-    book = data.split('\n')
+    book = data.split(',')
     data_to_find = input('Введите данные для поиска: ')
     contact_data = search(book, data_to_find)
     print(contact_data)
