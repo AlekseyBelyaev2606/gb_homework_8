@@ -57,13 +57,10 @@ def delete_data() -> None:
 
     contact_to_delete = find_data()
     book = list(filter(lambda contact: contact, data.split("\n")))
-    print(contact_to_delete)
-    # print(book)
-    # for i in book:
-    #     print(i)
-    #     if str(contact_to_delete) == str(i):
-    #         book.remove(contact_to_delete)
-    # print(book)
+    if contact_to_delete:
+        for x in contact_to_delete:
+            book.remove(x)
+
 
 
 def change_data() -> None:
