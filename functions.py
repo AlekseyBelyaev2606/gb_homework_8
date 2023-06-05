@@ -65,7 +65,10 @@ def delete_data() -> None:
 
 def change_data() -> None:
     """Изменяет контакт"""
-    pass
+    with open('book.txt', 'r', encoding='utf-8') as file:
+        data = file.read()
+    delete_data()
+    add_data()
 
 def write_data(data: list[str]) -> None:
     """" Записывает информацию в файл """
