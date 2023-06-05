@@ -1,3 +1,13 @@
+class fio:
+    def __init__(self, last_name = None, name = None):
+        self.name = name
+        self.last_name = last_name
+    def print_fio(self):
+        print(self)
+    def __str__(self):
+        return f"{self.last_name} | {self.name}"
+
+
 def show_data() -> None:
     """Выводит информацию из справочника"""
     with open('book.txt', 'r', encoding='utf-8') as file:
@@ -6,25 +16,57 @@ def show_data() -> None:
 
 def add_data() -> None:
     """Добавляет информацию в справочник."""
-    fio = input('Введите ФИО: ')
+    surname = input('Введите Фамилию: ')
+    name = input('Введите Имя: ')
     phone = input('Введите номер телефона: ')
     with open('book.txt', 'a', encoding='utf-8') as file:
-        file.write(f'\n{fio} | {phone}')
+        file.write(f'\n {fio(surname, name)} | {phone}')
 
 
 def find_data() -> None:
     """Печатает результат поиска по справочнику."""
     with open('book.txt', 'r', encoding='utf-8') as file:
         data = file.read()
-    print(data)
+    book = data.split('\n')
     data_to_find = input('Введите данные для поиска: ')
-    print(search(data, data_to_find))
+    contact_data = search(book, data_to_find)
+    print(contact_data)
+    return (contact_data)
 
 
 def search(book: str, info: str) -> str:
     """Находит в списке записи по определенному критерию поиска"""
-    book = book.split('\n')
-    for contact in book:
-        if info in contact:
-            return contact
-    return 'Совпадений не найдено'
+    # book = book.split('\n')
+    contact_finded = list(filter(lambda contact: info in contact, book))
+    if len(contact_finded) == 0:
+        print(len(contact_finded))
+        return 'Совпадений не найдено'
+
+    elif len(contact_finded) == 1:
+        return contact_finded
+    else:
+        print(contact_finded)
+        info = input("Требуется уточнение данных, найдено несколько совпадений ")
+        correction_contact = contact_finded
+        return search(correction_contact,info)
+
+def delete_data() -> None:
+    """Удаляет контакт"""
+    with open('book.txt', 'r', encoding='utf-8') as file:
+        data = file.read()
+
+    contact_to_delete = find_data()
+    book = list(filter(lambda contact: contact, data.split("\n")))
+    print(contact_to_delete)
+    # print(book)
+    # for i in book:
+    #     print(i)
+    #     if str(contact_to_delete) == str(i):
+    #         book.remove(contact_to_delete)
+    # print(book)
+
+
+def change_data() -> None:
+    """Изменяет контакт"""
+    pass
+
